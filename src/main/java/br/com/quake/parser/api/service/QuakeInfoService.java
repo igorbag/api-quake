@@ -1,6 +1,7 @@
 package br.com.quake.parser.api.service;
 
 import br.com.quake.parser.api.data.local.Constants;
+import br.com.quake.parser.api.model.Game;
 import io.reactivex.Flowable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -16,6 +17,7 @@ public class QuakeInfoService {
     @Autowired
     private GameNameService gameNameService;
 
+
     private Flowable<String> getGamesLog() {
         return Flowable.using(
                 () -> new BufferedReader(new FileReader(new ClassPathResource(Constants.GAMES_LOG_DATA_NAME).getFile())),
@@ -24,7 +26,9 @@ public class QuakeInfoService {
         );
     }
 
-    public void process() {
-        this.getGamesLog().subscribe(item -> gameNameService.setUpGameName(item), System.out::println);
+    public Game process() {
+        Game game = new Game();
+        this.getGamesLog().subscribe(itemGameLog -> gameNameService.getGameName(itemGameLog), System.out::println);
+        return game;
     }
 }

@@ -1,23 +1,32 @@
 package br.com.quake.parser.api.service;
 
 import br.com.quake.parser.api.data.local.Constants;
-import br.com.quake.parser.api.model.Game;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GameNameService {
 
+    @Autowired
+    private PlayerNameService playerNameService;
+
     private Integer quantidadeJogos = 0;
 
 
-    public void setUpGameName(String itemGameLog) {
+    public String getGameName(String itemGameLog) {
 
-        final Game game = new Game();
         if (isInitGame(itemGameLog)) {
             quantidadeJogos++;
-            game.setGame(Constants.GAME_NUMBER + quantidadeJogos);
         }
+
+
+        String player = playerNameService.getPlayerName(itemGameLog);
+        System.out.println(Constants.GAME_NUMBER + quantidadeJogos + " ---- " + player);
+
+
+        return Constants.GAME_NUMBER + quantidadeJogos;
     }
+
 
     private boolean isInitGame(String itemGameLog) {
         return itemGameLog.contains(Constants.INIT_GAME);
