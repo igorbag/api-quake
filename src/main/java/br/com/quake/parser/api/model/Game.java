@@ -7,6 +7,7 @@ import java.util.Map;
 
 @Data
 public class Game {
+    private String game;
     private int totalKills;
     private List<String> players;
     private Map kills;
