@@ -7,8 +7,16 @@ import java.util.Map;
 
 @Data
 public class Game {
-    private String game;
     private int totalKills;
     private List<String> players;
     private Map kills;
+
+    public Game() {
+    }
+
+    public Game(int totalKills, List<String> players, Map<String, Integer> kills) {
+        this.totalKills = totalKills;
+        this.players = players;
+        this.kills = kills;
+    }
 }
