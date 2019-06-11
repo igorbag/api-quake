@@ -24,16 +24,21 @@ public class QuakeInfoService {
     @Autowired
     private KillInfoService killInfoService;
 
-    public Map<String, Game> process() {
+    public Map<String, Game> getGameInfo() {
         final List<String> listGamesLogs = readLogService.getGamesLog();
         final Map<String, List> gameMatches = gameNameService.getGames(listGamesLogs);
-        Map<String, Game> games = new HashMap();
+        Map<String, Game> games = new HashMap<>();
 
         for (Map.Entry<String, List> match : gameMatches.entrySet()) {
             games.put(match.getKey(), this.setUpGameInformations(match.getValue()));
         }
 
         return games;
+    }
+
+
+    public Game getGameInfoById(int id) {
+        return getGameInfo().get("game_"+ id);
     }
 
 
