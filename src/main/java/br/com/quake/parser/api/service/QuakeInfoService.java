@@ -42,7 +42,7 @@ public class QuakeInfoService {
     }
 
 
-    private Game setUpGameInformations(final List<String> gameMatches) {
+    public Game setUpGameInformations(final List<String> gameMatches) {
         List<String> players = playerNameService.getPlayersName(gameMatches);
 
         Map<String, Integer> kills = killInfoService.getKills(players, gameMatches);
