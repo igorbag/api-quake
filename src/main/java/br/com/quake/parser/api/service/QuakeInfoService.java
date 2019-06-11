@@ -2,14 +2,14 @@ package br.com.quake.parser.api.service;
 
 import br.com.quake.parser.api.model.Game;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
-@Component
+@Service
 public class QuakeInfoService {
 
     @Autowired
@@ -38,7 +38,7 @@ public class QuakeInfoService {
 
 
     public Game getGameInfoById(int id) {
-        return getGameInfo().get("game_"+ id);
+        return getGameInfo().get("game_" + id);
     }
 
 
