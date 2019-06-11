@@ -1,34 +1,51 @@
 package br.com.quake.parser.api.service;
 
-import br.com.quake.parser.api.data.local.Constants;
 import br.com.quake.parser.api.model.Game;
-import io.reactivex.Flowable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
-@Service
+@Component
 public class QuakeInfoService {
 
     @Autowired
-    private GameNameService gameNameService;
+    private ReadLogService readLogService;
 
+    @Autowired
+    private GameService gameNameService;
 
-    private Flowable<String> getGamesLog() {
-        return Flowable.using(
-                () -> new BufferedReader(new FileReader(new ClassPathResource(Constants.GAMES_LOG_DATA_NAME).getFile())),
-                reader -> Flowable.fromIterable(() -> reader.lines().iterator()),
-                reader -> reader.close()
-        );
+    @Autowired
+    private PlayerNameService playerNameService;
+
+    @Autowired
+    private KillInfoService killInfoService;
+
+    public Map<String, Game> process() {
+        final List<String> listGamesLogs = readLogService.getGamesLog();
+        final Map<String, List> gameMatches = gameNameService.getGames(listGamesLogs);
+        Map<String, Game> games = new HashMap();
+
+        for (Map.Entry<String, List> match : gameMatches.entrySet()) {
+            games.put(match.getKey(), this.setUpGameInformations(match.getValue()));
+        }
+
+        return games;
     }
 
-    public Game process() {
-        Game game = new Game();
-        this.getGamesLog().subscribe(itemGameLog -> gameNameService.getGameName(itemGameLog), System.out::println);
-        return game;
+
+    private Game setUpGameInformations(final List<String> gameMatches) {
+        List<String> players = playerNameService.getPlayersName(gameMatches);
+
+        Map<String, Integer> kills = killInfoService.getKills(players, gameMatches);
+
+        return new Game(
+                killInfoService.getTotalOfKills(),
+                players,
+                kills
+        );
     }
 }
