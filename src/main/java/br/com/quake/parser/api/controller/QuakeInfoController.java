@@ -24,14 +24,14 @@ public class QuakeInfoController {
     private QuakeInfoService quakeInfoService;
 
     @ApiOperation(value = "Responsavel por buscar todos as partidas do quake 3")
-    @ApiResponses(value = @ApiResponse(code = 200, message = "Retorno", response = Game.class))
+    @ApiResponses(value = @ApiResponse(code = 200, message = "Retornando todos os resultados", response = Game.class))
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Map<String, Game>> getGameInfo() {
         return ResponseEntity.ok(quakeInfoService.getGameInfo());
     }
 
     @ApiOperation(value = "Responsavel por buscar o jogo por id")
-    @ApiResponses(value = @ApiResponse(code = 200, message = "Retorno", response = Game.class))
+    @ApiResponses(value = @ApiResponse(code = 200, message = "Retornando somente somente um único registro", response = Game.class))
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Game> quakeInfoById(@PathVariable Integer id) {
         return ResponseEntity.ok(quakeInfoService.getGameInfoById(id));
