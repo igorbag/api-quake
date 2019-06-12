@@ -13,4 +13,11 @@ public final class Constants {
     public static final String GAME = "game_";
     public static final String WORLD = "world";
 
+    public static String SWAGGER_NAME_PROJECT = "API Quake Parser";
+    public static String SWAGGER_NAME_DESCRIPTION = "API responsavel por ler o arquivo de log do Quake 3 e expor em serviços";
+    public static String SWAGGER_API_VERSION = "1.0.0";
+    public static String SWAGGER_API_LICENSE = "Apache License Version 2.0";
+    public static String SWAGGER_API_LICENSE_URL = "https://www.apache.org/licenses/LICENSE-2.0";
+    public static String PROJECT_BASE_PACKAGE_NAME = "br.com.quake.parser.api";
+
 }
