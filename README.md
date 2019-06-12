@@ -24,28 +24,21 @@ s
   
   #### Retorno
   ```
-   {
-        "name": "game_4",
-        "totalKills": 105,
-        "players": [
-            "Dono da Bola",
-            "Assasinu Credi",
-            "Isgalamido",
-            "Zeh"
-        ],
-        "kills": {
-            "Dono da Bola": 5,
-            "Assasinu Credi": 11,
-            "Isgalamido": 19,
-            "Zeh": 20
-        },
-        "links": [
-            {
-                "rel": "self",
-                "href": "http://localhost:8081/quake-api/games/game_4"
-            }
-        ]
-    }
+    "game_1": {
+           "totalKills": 2,
+           "players": [
+               "Isgalamido",
+               "Dono da Bola",
+               "Mocinha",
+               "Zeh"
+           ],
+           "kills": {
+               "Dono da Bola": 0,
+               "Mocinha": -2,
+               "Isgalamido": 2,
+               "Zeh": 0
+           }
+       }
   ```
   
   #### Endpoints
