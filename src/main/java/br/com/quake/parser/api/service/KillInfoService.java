@@ -1,6 +1,6 @@
 package br.com.quake.parser.api.service;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static br.com.quake.parser.api.data.local.Constants.*;
 
-@Component
+@Service
 public class KillInfoService {
     private Map<String, Integer> kills;
     private int worldKillsCount;
